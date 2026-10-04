@@ -1,0 +1,54 @@
+# Project: ThreatTrail - Minimum Viable Product (MVP)
+
+## Project Overview
+ThreatTrail is a web-based cybersecurity training platform designed to simulate Security Operations Center (SOC) investigations for Active Directory attacks[cite: 4]. 
+
+**CRITICAL ARCHITECTURAL DIRECTIVE:** This is a training platform, not a live SIEM[cite: 5]. There is NO dynamic rule engine and NO live log ingestion[cite: 5]. The platform uses pre-recorded, static JSON Windows Event logs and hardcoded alerts mapped via database relationships. 
+
+## Technology Stack
+- **Frontend:** React (Vite), Tailwind CSS, React Router[cite: 5].
+- **Backend:** Python, FastAPI, SQLAlchemy, Pydantic[cite: 5].
+- **Database:** PostgreSQL[cite: 5].
+- **Deployment:** Docker (out of scope for initial MVP development)[cite: 5].
+
+## Core Workflow (The CTF Approach)
+1. User selects an attack scenario (e.g., Password Spraying) from the dashboard[cite: 6].
+2. The frontend fetches the hardcoded Alert and the pre-curated Windows Event Logs for that specific scenario from the backend[cite: 6].
+3. The user investigates the logs in a searchable table to identify the source IP, affected accounts, and MITRE ATT&CK technique[cite: 4, 6].
+4. The user submits answers to predefined investigation questions[cite: 4, 6].
+5. The backend grades the submission against the database and returns a score[cite: 4, 6].
+
+## Database Schema (PostgreSQL)
+The data model must support static scenarios[cite: 5]:
+- `users`: id, username, password_hash
+- `scenarios`: id, name, description, mitre_technique
+- `alerts`: id, scenario_id, title, severity (Low, Medium, High, Critical)
+- `logs`: id, scenario_id, event_id, timestamp, source_ip, username, target_host, raw_event_data (JSONB)
+- `questions`: id, scenario_id, question_text, correct_answer
+- `investigation_results`: id, user_id, scenario_id, score
+
+## Required Backend API Endpoints
+- `GET /api/scenarios`: List available scenarios.
+- `GET /api/scenarios/{id}/alert`: Fetch the predefined alert for the scenario.
+- `GET /api/scenarios/{id}/logs`: Fetch the curated logs (15-30 events) for the log viewer.
+- `GET /api/scenarios/{id}/questions`: Fetch the investigation questions.
+- `POST /api/scenarios/{id}/submit`: Receive user answers, calculate the score, and return the result.
+
+## Required Frontend Views
+1. **Dashboard:** Lists available scenarios and active alerts[cite: 4].
+2. **Investigation Interface (Main View):**
+   - **Top:** Alert summary (Severity, Title)[cite: 4].
+   - **Left Panel:** Searchable, filterable table displaying Windows Event logs[cite: 4].
+   - **Right Panel:** Investigation Q&A form and MITRE ATT&CK selection[cite: 4].
+3. **Report View:** Displays the final graded score and correct/incorrect breakdown[cite: 4].
+
+## Initial Data Seed Requirement
+The AI must prepare seed scripts to populate the database with at least ONE working scenario:
+- **Scenario:** Password Spraying (MITRE T1110.003)[cite: 5, 8].
+- **Alert:** "High Severity: Possible Password Spraying"[cite: 4].
+- **Logs:** 15 x Event 4625 (Failed Logon) from a single IP, followed by 1 x Event 4624 (Successful Logon)[cite: 7].
+- **Questions:** 
+  1. What is the source IP? 
+  2. Which account was successfully compromised? 
+  3. What is the MITRE technique ID?[cite: 7]
+  

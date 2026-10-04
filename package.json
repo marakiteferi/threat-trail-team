@@ -1,0 +1,15 @@
+{
+  "name": "threattrail-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ThreatTrail - SOC Investigation Platform",
+  "scripts": {
+    "dev": "npm --prefix threattrail-frontend run dev",
+    "build": "npm --prefix threattrail-frontend run build",
+    "preview": "npm --prefix threattrail-frontend run preview",
+    "lint": "npm --prefix threattrail-frontend run lint",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "npm --prefix threattrail-frontend run build",
+    "test:backend": "cd threattrail-backend && pytest"
+  }
+}
