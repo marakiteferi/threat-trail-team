@@ -1,28 +1,44 @@
 ﻿# ThreatTrail — SOC Analyst Investigation Platform
 
-ThreatTrail is an interactive cybersecurity training platform designed to simulate Security Operations Center (SOC) investigations for Active Directory attacks. Instead of requiring heavy SIEM infrastructure, ThreatTrail pairs curated Windows Event log datasets (`JSONB`), Sigma detection rules, and Active Directory environment context with a guided forensic Q&A workbench.
+**GitHub Repository Link:** [https://github.com/marakiteferi/threat-trail-team](https://github.com/marakiteferi/threat-trail-team)
+
+## 1. Video Presentation
+**Watch the 5-Minute Demonstration Here:** 
+[Insert Video Link - e.g., YouTube, Google Drive, or Loom URL]
+
+
+
+## 2. Team Information
+* **Mearg Mehari** — CTC-692-26
+* **Sofoniyas Fikadu** — CTC-160-26
+* **Kidus Girma** — CTC-3276-26 
+* **Jedidiah melkamu** — CTC-4884-26
+* **Maraki Teferi** — CTC-6496-26
+---
+
+## 3. Project Information
+
+### Purpose
+ThreatTrail is an interactive cybersecurity training platform designed to simulate Security Operations Center (SOC) investigations for Active Directory attacks. Instead of requiring heavy SIEM infrastructure, ThreatTrail pairs curated Windows Event log datasets (`JSONB`), Sigma detection rules, and Active Directory environment context with a guided forensic Q&A workbench. It provides junior analysts with a realistic, hands-on environment to hunt for active threats, reconstruct attack timelines, and receive immediate diagnostic feedback on their forensic accuracy without the overhead of deploying full virtual machines.
+
+### Main Features
+- **Automated Threat Curation:** The backend ingests raw, industry-standard Windows Event logs (like Mordor datasets), normalizes the telemetry, and automatically generates targeted forensic scenarios mapped to MITRE ATT&CK techniques.
+- **SOC Investigation Workbench:** A dynamic frontend interface where analysts can filter raw telemetry, inspect decoded payload fields, and utilize "Click-to-Pivot" workflows to trace lateral movement and privilege escalation.
+- **Evidence-Backed Grading:** Trainees must actively pin supporting key-evidence logs to validate their findings. The server tracks all attempts and hint usages to calculate a final score, preventing client-side score manipulation.
+- **SOC Realism vs. Guided Mode:** Trainees can toggle between a Guided Mode that highlights suspicious event heuristics for onboarding, and a SOC Realism Mode that removes visual spoilers and forces analysts to sift through benign Active Directory background noise.
+- **Incident Containment Playbooks:** Analysts conclude their investigations by selecting appropriate containment actions (e.g., isolating hosts or disabling compromised service accounts) for holistic incident response training.
 
 ---
 
-## Key Features
+## 4. Tech Stack
 
-* **SOC Investigation Workbench**: Searchable, filterable Windows Event log viewer with Formatted & Raw JSON inspection, one-click IOC copying, key evidence pinning, and attack timeline reconstruction.
-* **Contextual Threat Intelligence**: Built-in Sigma detection rule viewer, Active Directory user/host/group lookup, and Windows Event ID cheat sheet.
-* **Automated Forensic Grading**: Server-side grading with weighted points, performance tiers, and per-question forensic explanations.
-* **Admin Scenario Studio**: Role-protected instructor console to create, edit, draft/publish scenarios, and upload `.json`/`.zip` event log bundles.
-* **Offline Demo Resilience**: Built-in client fallback dataset ensures live demos work seamlessly even without network connectivity.
+- **Frontend**: React 19, Vite 8, React Router v7, Axios, Lucide Icons
+- **Backend**: Python 3.10+, FastAPI, SQLAlchemy, Pydantic
+- **Database**: PostgreSQL (with `JSONB` for raw Windows Event payloads)
 
 ---
 
-## Tech Stack
-
-* **Frontend**: React 19, Vite 8, React Router v7, Axios, Lucide Icons
-* **Backend**: Python 3.10+, FastAPI, SQLAlchemy, Pydantic
-* **Database**: PostgreSQL (with `JSONB` for raw Windows Event payloads)
-
----
-
-## Architecture Overview
+## 5. Architecture Overview
 
 ```mermaid
 flowchart LR
@@ -49,15 +65,15 @@ flowchart LR
 
 ---
 
-## Prerequisites
+## 6. Prerequisites
 
-* **Node.js**: v20.19+ or v22.12+
-* **Python**: v3.10+
-* **PostgreSQL**: v14+ running locally (or SQLite fallback for testing)
+- **Node.js**: v20.19+ or v22.12+
+- **Python**: v3.10+
+- **PostgreSQL**: v14+ running locally (or SQLite fallback for testing)
 
 ---
 
-## Quick Start (Under 5 Minutes)
+## 7. Quick Start (Under 5 Minutes)
 
 ### 1. Clone & Configure Environment
 ```bash
@@ -83,7 +99,7 @@ Open **`http://localhost:5173`** in your browser.
 
 ---
 
-## Environment Variables
+## 8. Environment Variables
 
 | Variable | Required | Default | Description |
 | :--- | :---: | :--- | :--- |
@@ -96,7 +112,7 @@ Open **`http://localhost:5173`** in your browser.
 
 ---
 
-## Running Tests & Linting
+## 9. Running Tests & Linting
 
 ```bash
 # Run backend unit, smoke, and security tests
@@ -109,7 +125,7 @@ npm --prefix threattrail-frontend run build
 
 ---
 
-## Project Structure
+## 10. Project Structure
 
 ```text
 threat-trail/
@@ -133,16 +149,16 @@ threat-trail/
 
 ---
 
-## Known Limitations
+## 11. Known Limitations
 
-* **Static Scenarios Only**: ThreatTrail does not ingest live logs or execute Sigma rules dynamically; all scenarios use pre-curated Windows Event logs.
-* **Single-Node Rate Limiting**: Rate limiting is stored in process memory for local/demo simplicity.
-* **Normalized Exact-Match Grading**: Answers are graded via case-insensitive normalized string comparison against configured answer keys.
+- **Static Scenarios Only**: ThreatTrail does not ingest live logs or execute Sigma rules dynamically; all scenarios use pre-curated Windows Event logs.
+- **Single-Node Rate Limiting**: Rate limiting is stored in process memory for local/demo simplicity.
+- **Normalized Exact-Match Grading**: Answers are graded via case-insensitive normalized string comparison against configured answer keys.
 
 ---
 
-## Security Considerations
+## 12. Security Considerations
 
-* **Server-Side Grading**: `correct_answer` values are never transmitted to the client prior to quiz submission.
-* **Upload Protection**: Admin log uploads validate archive size, compression ratios, and file paths to prevent Zip-Bomb and Zip-Slip attacks.
-* **Security Headers & Rate Limiting**: Responses include `Content-Security-Policy`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, and brute-force rate limiting on authentication and grading endpoints.
+- **Server-Side Grading**: `correct_answer` values are never transmitted to the client prior to quiz submission.
+- **Upload Protection**: Admin log uploads validate archive size, compression ratios, and file paths to prevent Zip-Bomb and Zip-Slip attacks.
+- **Security Headers & Rate Limiting**: Responses include `Content-Security-Policy`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, and brute-force rate limiting on authentication and grading endpoints.
