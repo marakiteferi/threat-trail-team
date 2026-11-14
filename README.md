@@ -12,7 +12,7 @@ https://youtu.be/1p-mTFnFfFs
 * **Mearg Mehari** — CTC-692-26
 * **Sofoniyas Fikadu** — CTC-160-26
 * **Kidus Girma** — CTC-3276-26 
-* **Jedidiah melkamu** — CTC-4884-26
+* **Jedidiah melkamu** — CTC-4884-26 - **https://youtu.be/1p-mTFnFfFs**
 * **Maraki Teferi** — CTC-6496-26
 ---
 
