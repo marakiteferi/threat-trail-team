@@ -10,8 +10,8 @@ https://youtu.be/1p-mTFnFfFs
 
 ## 2. Team Information
 * **Mearg Mehari** — CTC-692-26 - **https://youtu.be/HN9PsV5CQzQ**
-* **Sofoniyas Fikadu** — CTC-160-26 
-* **Kidus Girma** — CTC-3276-26 
+* **Sofoniyas Fikadu** — CTC-160-26 -**https://youtu.be/7jKhc99WOC0**
+* **Kidus Girma** — CTC-3276-26 - **https://youtu.be/_wGA-NS98dk?si=lbxYp1rJKO9oPiSx**
 * **Jedidiah melkamu** — CTC-4884-26 - **https://youtu.be/9E-lvmbr_vE**
 * **Maraki Teferi** — CTC-6496-26 - **https://youtu.be/1p-mTFnFfFs**
 ---
